@@ -12,5 +12,12 @@
     "title": "Cakes",
     "imageName": "cake.jpeg",
     "description": "Cakes for all your ocassions !!."
+  },
+  {
+    "id": 3,
+    "type": "bakery",
+    "title": "Wedding Cakes",
+    "imageName": "cake.jpeg",
+    "description": "Cakes for all your ocassions !!."
   }
 ]
