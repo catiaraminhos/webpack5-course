@@ -1,63 +1,67 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    index: "./src/index.js",
-    courses: "./src/pages/courses.js",
+    index: './src/index.js',
+    courses: './src/pages/courses.js'
   },
   output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
   devServer: {
-    static: "./dist",
+    static: './dist'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCSSExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.s[ac]ss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpeg|jpg|gif)$/,
-        type: "asset/resource",
-      },
-    ],
+        type: 'asset/resource'
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      chunks: ["index"],
-      filename: "index.html",
+      template: './src/index.html',
+      chunks: ['index'],
+      filename: 'index.html'
     }),
     new HtmlWebpackPlugin({
-      template: "./src/pages/courses.html",
-      chunks: ["courses"],
-      filename: "courses.html",
-      base: "pages",
+      template: './src/pages/courses.html',
+      chunks: ['courses'],
+      filename: 'courses.html',
+      base: 'pages'
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/assets/images/*").replace(/\\/g, "/"),
-          to: path.resolve(__dirname, "dist").replace(/\\/g, "/"),
-          context: "src",
-        },
-      ],
+          from: path
+            .resolve(__dirname, 'src/assets/images/*')
+            .replace(/\\/g, '/'),
+          to: path.resolve(__dirname, 'dist').replace(/\\/g, '/'),
+          context: 'src'
+        }
+      ]
     }),
-    new BundleAnalyzerPlugin({}),
+    // new BundleAnalyzerPlugin({}),
+    new MiniCSSExtractPlugin()
   ],
   optimization: {
     splitChunks: {
-      chunks: "all",
-    },
-  },
+      chunks: 'all'
+    }
+  }
 };
