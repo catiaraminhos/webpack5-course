@@ -45,11 +45,34 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCSSExtractPlugin.loader, 'css-loader']
+        use: [
+          MiniCSSExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['postcss-preset-env', {}]]
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.s[ac]ss$/,
-        use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
+        use: [
+          MiniCSSExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['postcss-preset-env', {}]]
+              }
+            }
+          },
+          'sass-loader'
+        ]
       },
       {
         test: /\.(jpg|png|jpeg|gif)$/,
