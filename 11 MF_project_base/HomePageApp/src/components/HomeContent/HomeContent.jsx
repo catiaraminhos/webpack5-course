@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import QuickBooking from "../QuickBooking/QuickBooking.jsx";
-import "./HomeContent.scss";
+import React, { Suspense, useEffect, useState } from 'react';
+import QuickBooking from '../QuickBooking/QuickBooking.jsx';
+const MovieCard = React.lazy(() => import('components/MovieCard'));
+import './HomeContent.scss';
 
-const dummyItem = [{name:"Dummy Movie"}]
+const dummyItem = [{ name: 'Dummy Movie' }];
 
 const HomeContent = (props) => {
   const [movies, setMovies] = useState(dummyItem);
@@ -15,7 +16,7 @@ const HomeContent = (props) => {
   }, []);
 
   const movieClicked = (item) => {
-    if (typeof props.movieClicked === "function") {
+    if (typeof props.movieClicked === 'function') {
       props.movieClicked(item);
     }
   };
@@ -25,7 +26,9 @@ const HomeContent = (props) => {
       return (
         <div onClick={() => movieClicked(item)} key={item.name}>
           <div>Load the cards Here</div>
-          {/* Load the Movie Card Here */}
+          <Suspense fallback={null}>
+            <MovieCard />
+          </Suspense>
         </div>
       );
     });
@@ -36,9 +39,7 @@ const HomeContent = (props) => {
   return (
     <div className="home-content-container">
       <QuickBooking></QuickBooking>
-      <div className="movies-container">
-        {renderMovieList()}
-      </div>
+      <div className="movies-container">{renderMovieList()}</div>
     </div>
   );
 };
