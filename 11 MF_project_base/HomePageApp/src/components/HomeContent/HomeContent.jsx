@@ -12,6 +12,7 @@ const HomeContent = (props) => {
     // Add the logic to load the movies from server and set to the state
     const response = await fetch('http://localhost:5555/movies');
     const data = await response.json();
+    setMovies(data);
     console.log(data);
   }, []);
 
@@ -25,10 +26,7 @@ const HomeContent = (props) => {
     let items = movies.map((item) => {
       return (
         <div onClick={() => movieClicked(item)} key={item.name}>
-          <div>Load the cards Here</div>
-          <Suspense fallback={null}>
-            <MovieCard />
-          </Suspense>
+          <MovieCard key={item.id} title={item.name} imageUrl={item.imageUrl} />
         </div>
       );
     });
@@ -39,7 +37,9 @@ const HomeContent = (props) => {
   return (
     <div className="home-content-container">
       <QuickBooking></QuickBooking>
-      <div className="movies-container">{renderMovieList()}</div>
+      <div className="movies-container">
+        <Suspense fallback={null}>{renderMovieList()}</Suspense>
+      </div>
     </div>
   );
 };
