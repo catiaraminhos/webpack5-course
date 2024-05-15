@@ -7,21 +7,15 @@
   align-items: center;
   padding: 10px;
 
-  span{
+  span {
     color: white;
   }
 
-  .header{    
-    color: white;
-    font-size: x-large;
-    font-family: 'Permanent Marker', cursive;
-  }
-
-  .spacer{
+  .spacer {
     flex-grow: 1;
   }
 
-  .mr-1{
+  .mr-1 {
     margin-right: 10px;
   }
 }
