@@ -1,13 +1,19 @@
-import React, { Suspense } from "react";
-import "./App.scss";
-import { Switch, Route } from "react-router-dom";
-const HomePage = React.lazy(() => import("homepage/HomePage"));
-const DetailsPage = React.lazy(() => import("detailspage/DetailsPage"));
+import React, { Suspense } from 'react';
+import './App.scss';
+import { Switch, Route, useHistory } from 'react-router-dom';
+const HomePage = React.lazy(() => import('homepage/HomePage'));
+const DetailsPage = React.lazy(() => import('detailspage/DetailsPage'));
 const SeatSelectionPage = React.lazy(() =>
-  import("seatselection/SeatSelection")
+  import('seatselection/SeatSelection')
 );
 
 const App = () => {
+  const history = useHistory();
+
+  const movieClicked = (movie) => {
+    history.push('/details');
+  };
+
   return (
     <Switch>
       <Route path="/details">
@@ -22,7 +28,7 @@ const App = () => {
       </Route>
       <Route path="/">
         <Suspense fallback={null}>
-          <HomePage></HomePage>
+          <HomePage movieClicked={movieClicked}></HomePage>
         </Suspense>
       </Route>
     </Switch>
