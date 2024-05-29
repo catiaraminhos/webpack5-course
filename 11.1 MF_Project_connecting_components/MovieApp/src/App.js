@@ -29,7 +29,10 @@ const App = () => {
       </Route>
       <Route path="/">
         <Suspense fallback={null}>
-          <HomePage movieClicked={movieClicked}></HomePage>
+          <HomePage
+            movieClicked={movieClicked}
+            routing={{ history, location }}
+          ></HomePage>
         </Suspense>
       </Route>
     </Switch>
