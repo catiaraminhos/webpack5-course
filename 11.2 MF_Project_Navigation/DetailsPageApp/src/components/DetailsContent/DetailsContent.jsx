@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "./DetailsContent.scss";
+import React, { useEffect, useState } from 'react';
+import './DetailsContent.scss';
 
 const DetailsContent = (props) => {
   const [movie, setMovie] = useState([]);
-  const [date, setDate] = useState("01/02/2022");
-  const [time, setTime] = useState("10 Am");
+  const [date, setDate] = useState('01/02/2022');
+  const [time, setTime] = useState('10 Am');
 
   useEffect(async () => {
-    const resp = await fetch("http://localhost:5555/movies");
+    const resp = await fetch('http://localhost:5555/movies');
     const data = await resp.json();
 
-    let pathArr = props.location.pathname.split("/");
+    let pathArr = props.routing.location.pathname.split('/');
     let id = pathArr[pathArr.length - 1];
 
     const selectedMovie = data.filter((movie) => {
@@ -27,12 +27,18 @@ const DetailsContent = (props) => {
     return <img src={imgUrl}></img>;
   };
 
-  const bookMovie = () => {
+  const bookMovie = (routing) => {
     const booking = {
       movie: movie.id,
       date,
-      time,
-    };   
+      time
+    };
+    console.log(booking);
+    import('movieapp/MovieData').then((module) => {
+      const movieData = module.default;
+      movieData.next(booking);
+    });
+    routing.history.push('/book');
   };
 
   return (
@@ -75,7 +81,7 @@ const DetailsContent = (props) => {
             <option value="8 PM">8 PM</option>
             <option value="9:30 PM">9:30 PM</option>
           </select>
-          <button onClick={bookMovie}>Book Now</button>
+          <button onClick={() => bookMovie(props.routing)}>Book Now</button>
         </div>
       </div>
     </div>
