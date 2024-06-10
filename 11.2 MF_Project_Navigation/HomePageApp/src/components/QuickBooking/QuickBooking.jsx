@@ -19,7 +19,7 @@ const QuickBooking = () => {
       const movieData = module.default;
       movieData.next(booking);
     });
-    context.history.push('book');
+    context.history.push('/book');
   };
 
   return (
