@@ -35,15 +35,15 @@ const QuickBooking = () => {
             <span>Select Movie</span>
             <select onChange={(e) => setMovie(e.target.value)} value={movie}>
               <option value="1">Avengers End Game</option>
-              <option value="2">Spiderman</option>
-              <option value="3">IronMan</option>
-              <option value="4">Doctor Strange</option>
-              <option value="5">Black Panther</option>
-              <option value="6">Thor</option>
-              <option value="7">Captain America</option>
-              <option value="8">Black Widow</option>
-              <option value="9">Venom</option>
-              <option value="10">Ethernals</option>
+              <option value="2">Black Panther</option>
+              <option value="3">Black Widow</option>
+              <option value="4">Captain America</option>
+              <option value="5">Doctor Strange</option>
+              <option value="6">Ethernals</option>
+              <option value="7">IronMan</option>
+              <option value="8">Spiderman</option>
+              <option value="9">Thor</option>
+              <option value="10">Venom</option>
             </select>
           </div>
           <div className="mr-1">

@@ -30,7 +30,10 @@ const SeatSelectionContent = () => {
     import('movieapp/MovieData').then((module) => {
       const movieData = module.default;
       movieData.subscribe({
-        next: (booking) => console.log('Booking Data Received', booking)
+        next: (booking) => {
+          console.log('Booking Data Received', booking);
+          loadBooking(booking);
+        }
       });
     });
   }, []);
